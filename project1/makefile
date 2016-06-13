@@ -1,5 +1,12 @@
+# 若目录不存在,则创建目录
+define MKDIR_EXPORTS
+	test -d $(JAR_DIR) || mkdir -pv $(JAR_DIR)
+endef
+
 # 设置要生成的jar包名
-JAR_PKG = HelloWorld.jar
+JAR_DIR = exports
+JAR_PKG = $(JAR_DIR)/HelloWorld.jar
+# JAR_PKG := HelloWorld.jar
 
 # 设置项目入口点
 ENTRY_POINT = com.nixon.Test
@@ -19,14 +26,24 @@ JFLAGS = -encoding UTF-8
 
 ########### 编译动作 ############
 
+vpath %.class bin
+vpath %.java src
+
+# 第一个目标(target)会被认为是默认目标, 
+# 即直接执行`make`使用的是build目标
 build: $(SOURCE_FILES:.java=.class)
+
+# 把SOURCE_FILES中所有以.java结尾的字符串替换为.class 
+# 对结尾的定义: 空格或结束符
 
 %.class: %.java
 	$(JAVAC) -cp bin -d bin $(JFLAGS) $<
 
 rebuild: clean build
 
-.PHONY: new clean run jar
+# 使用PHONY目标,避免同名文件相冲突,不会检查clean文件存在与否,
+# 都要执行清除操作
+.PHONY: new clean run jar runJar
 
 new:
 ifeq ("$(HAS_RES_DIR)", "yes")
@@ -35,8 +52,7 @@ else
 	mkdir -pv src bin
 endif
 
-clean:
-	rm -rfv bin/*
+# ifeq or ifneq or ifdef
 
 run:
 	java -cp bin $(ENTRY_POINT)
@@ -46,7 +62,15 @@ runJar:
 
 jar:
 ifeq ("$(HAS_RES_DIR)","yes")
+	$(MKDIR_EXPORTS)
 	jar cvfe $(JAR_PKG) $(ENTRY_POINT) -C bin . res
 else
+	$(MKDIR_EXPORTS)
 	jar cvfe $(JAR_PKG) $(ENTRY_POINT) -C bin .
 endif
+
+clean:
+	rm -rfv bin/*
+	rm -fv  $(JAR_PKG)
+
+
