@@ -20,6 +20,7 @@ $(JAVA_HOME)/lib
 
 # 源文件列表
 SOURCE_FILES = \
+src/com/practice/P16.java\
 src/com/nixon/Test.java
 
 # 设置java编译器
@@ -41,6 +42,7 @@ build: $(SOURCE_FILES:.java=.class)
 # 对结尾的定义: 空格或结束符
 
 %.class: %.java
+	@echo -------------------- compile $< --------------------
 	$(JAVAC) -Xlint:unchecked -cp bin:$(EXTENTION_JAR) -d bin $(JFLAGS) $<
 
 rebuild: clean build
@@ -59,7 +61,9 @@ endif
 # ifeq or ifneq or ifdef
 
 run:
+	@echo --------------------- running ----------------------
 	java -cp bin $(ENTRY_POINT)
+	@echo ---------------------   end   ----------------------
 
 runJar:
 	java -jar $(JAR_PKG)
