@@ -21,6 +21,7 @@ $(JAVA_HOME)/lib
 # 源文件列表
 SOURCE_FILES = \
 src/com/practice/P16.java\
+src/com/practice/P17.java\
 src/com/nixon/Test.java
 
 # 设置java编译器

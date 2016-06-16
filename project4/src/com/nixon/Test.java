@@ -1,6 +1,7 @@
 package com.nixon;
 
 import com.practice.P16;
+import com.practice.P17;
 import java.util.*;
 
 public class Test {
@@ -15,5 +16,11 @@ public class Test {
 
         P16 p16 = new P16();
         p16 = null;
+
+
+        P17[] p17Arr = {
+            new P17(),
+            new P17("Hello")
+        };
     }
 }
