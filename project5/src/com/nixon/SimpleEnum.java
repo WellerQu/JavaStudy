@@ -11,5 +11,12 @@ public class SimpleEnum {
         Spiciness spiciness = Spiciness.HOT;
         System.out.println("Hello Enum");
         System.out.println(spiciness);
+
+
+        System.out.println(spiciness.ordinal());
+
+        for (Spiciness s : Spiciness.values()) {
+            System.out.println(s + ":" + s.ordinal());
+        }
     }
 }

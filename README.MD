@@ -1,5 +1,7 @@
 # 学习Java
 
+## 基础篇
+
 ### Project1
 - 编写makefile
 - 编译单文件
@@ -27,3 +29,15 @@
 
 ### Project5 
 - enmu实际上也是类, 并且可以有自己的方法
+- enum对象的实例方法ordinal()返回序数, 序数从0开始, 按声明顺序加1;
+
+---
+
+## 高级篇
+
+### maven 
+- 安装maven
+    `brew install maven`
+- 使用模板
+    - 列出模板
+        `mvn archetype:generate`
