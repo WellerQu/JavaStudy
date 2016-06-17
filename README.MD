@@ -24,3 +24,6 @@
 - 数组长度不可变, ArrayList长度可变;
 - 尽量使用已知类型的ArrayList<T>, 否则会得到编译器警告;
 - 要使用第三方jar包, 需要在-cp参数中指明: /path/to/xx.jar;
+
+### Project5 
+- enmu实际上也是类, 并且可以有自己的方法
