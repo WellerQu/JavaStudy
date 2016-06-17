@@ -3,10 +3,17 @@ define MKDIR_EXPORTS
 	test -d $(JAR_DIR) || mkdir -pv $(JAR_DIR)
 endef
 
+define MKDIR_BIN
+	test -d $(OUTPUT_BIN) || mkdir -pv $(OUTPUT_BIN)
+endef
+
 # 设置要生成的jar包名
 JAR_DIR = exports
 JAR_PKG = $(JAR_DIR)/HelloWorld.jar
 # JAR_PKG := HelloWorld.jar
+
+# 输出.class文件的bin目录
+OUTPUT_BIN = bin
 
 # 设置项目入口点
 ENTRY_POINT = com.nixon.SimpleEnum
@@ -20,6 +27,7 @@ $(JAVA_HOME)/lib
 
 # 源文件列表
 SOURCE_FILES = \
+src/com/practice/Spiciness.java\
 src/com/nixon/SimpleEnum.java
 
 # 设置java编译器
@@ -30,7 +38,7 @@ JFLAGS = -encoding UTF-8
 
 ########### 编译动作 ############
 
-vpath %.class bin
+vpath %.class $(OUTPUT_BIN)
 vpath %.java src
 
 # 第一个目标(target)会被认为是默认目标, 
@@ -41,8 +49,7 @@ build: $(SOURCE_FILES:.java=.class)
 # 对结尾的定义: 空格或结束符
 
 %.class: %.java
-	@echo -------------------- compile $< --------------------
-	$(JAVAC) -Xlint:unchecked -cp bin:$(EXTENTION_JAR) -d bin $(JFLAGS) $<
+	$(JAVAC) -Xlint:unchecked -cp $(OUTPUT_BIN):$(EXTENTION_JAR) -d $(OUTPUT_BIN) $(JFLAGS) $<
 
 rebuild: clean build
 
@@ -53,16 +60,16 @@ rebuild: clean build
 new:
 	@echo initialize project success
 ifeq ("$(HAS_RES_DIR)", "yes")
-	mkdir -pv src bin res
+	mkdir -pv src $(OUTPUT_BIN) res
 else
-	mkdir -pv src bin
+	mkdir -pv src $(OUTPUT_BIN)
 endif
 
 # ifeq or ifneq or ifdef
 
 run:
 	@echo --------------------- running ----------------------
-	java -cp bin $(ENTRY_POINT)
+	java -cp $(OUTPUT_BIN) $(ENTRY_POINT)
 	@echo ---------------------   end   ----------------------
 
 runJar:
@@ -71,14 +78,14 @@ runJar:
 jar:
 ifeq ("$(HAS_RES_DIR)","yes")
 	$(MKDIR_EXPORTS)
-	jar cvfe $(JAR_PKG) $(ENTRY_POINT) -C bin . res
+	jar cvfe $(JAR_PKG) $(ENTRY_POINT) -C $(OUTPUT_BIN) . res
 else
 	$(MKDIR_EXPORTS)
-	jar cvfe $(JAR_PKG) $(ENTRY_POINT) -C bin .
+	jar cvfe $(JAR_PKG) $(ENTRY_POINT) -C $(OUTPUT_BIN) .
 endif
 
 clean:
-	rm -rfv bin/*
+	rm -rfv $(OUTPUT_BIN)/*
 	rm -fv  $(JAR_PKG)
 
 
