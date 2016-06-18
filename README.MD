@@ -30,6 +30,11 @@
 ### Project5 
 - enmu实际上也是类, 并且可以有自己的方法
 - enum对象的实例方法ordinal()返回序数, 序数从0开始, 按声明顺序加1;
+- 静态方法values()可返回所有的枚举项;
+
+### Project6
+- 访问权控制(可见范围依次递减): public, protected, (default), private
+- 一个java文件被称为一个编译单元, 一个编译单元中可以存在多个类, 但只能有一个public的类
 
 ---
 
