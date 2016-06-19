@@ -28,21 +28,30 @@
 - 要使用第三方jar包, 需要在-cp参数中指明: /path/to/xx.jar;
 
 ### Project5 
-- enmu实际上也是类, 并且可以有自己的方法
+- enmu实际上也是类, 并且可以有自己的(包括抽象)方法. 同样, 也可以完成继承;
 - enum对象的实例方法ordinal()返回序数, 序数从0开始, 按声明顺序加1;
 - 静态方法values()可返回所有的枚举项;
 
 ### Project6
 - 访问权控制(可见范围依次递减): public, protected, (default), private
 - 一个java文件被称为一个编译单元, 一个编译单元中可以存在多个类, 但只能有一个public的类
+- import 可以精确的方法, 比如`import com.nixon.SimpleClass.*;` 其中SimpleClass是一个类, 接着就可以直接使用这个类的**静态**方法.
+
+---
+
+## 进阶篇
+
+### project7
+- 类可以继承自另一个类, 关键词: **extends**
+- *super*关键词表示父类构造函数或同名重写的方法;
 
 ---
 
 ## 高级篇
 
 ### maven 
-- 安装maven
+- 安装maven<br/>
     `brew install maven`
 - 使用模板
-    - 列出模板
+    - 列出模板(同时会安装模板)
         `mvn archetype:generate`
