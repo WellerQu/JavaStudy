@@ -44,7 +44,7 @@ vpath %.java src
 # 第一个目标(target)会被认为是默认目标, 
 # 即直接执行`make`使用的是build目标
 build: $(SOURCE_FILES:.java=.class)
-	@say 完成编译
+	@say 编译完成
 
 # 把SOURCE_FILES中所有以.java结尾的字符串替换为.class 
 # 对结尾的定义: 空格或结束符

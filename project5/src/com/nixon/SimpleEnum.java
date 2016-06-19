@@ -17,6 +17,7 @@ public class SimpleEnum {
 
         for (Spiciness s : Spiciness.values()) {
             System.out.println(s + ":" + s.ordinal());
+            System.out.println(s + ":" + s.getValue());
         }
     }
 }
