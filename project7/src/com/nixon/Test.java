@@ -2,8 +2,12 @@ package com.nixon;
 
 public class Test {
     private static final String str = "Hello";
+    public String aaa = "";
 
     public static void main(String[] args) {
+        Test t = new Test();
+        t.aaa = "Hello";
+
         Benz benz = new Benz();
         benz.sayHello();
 
